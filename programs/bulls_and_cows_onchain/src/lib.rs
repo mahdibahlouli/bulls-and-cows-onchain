@@ -7,7 +7,7 @@ declare_id!("28rwUTUkRqC9ZgqXMdR9GxWFuUo9PPyqhHwMALZLBbLU");
 //defining a solana program module that contains all the instructions
 #[program]
 // we use pub so the functions and modules inside anchor bac can be used externally
-pub mod anchor_bac {
+pub mod bulls_and_cows_onchain {
     // to allow the use of all the components from the parent module without redeclaring them
     use super::*;
     use std::cmp::Ordering;
@@ -55,6 +55,7 @@ pub struct GuessingAccount{
 #[derive(Accounts)]
 pub struct AccountContext<'info>{
     #[account(
+        mut, 
         // tells anchor to init the account if its not initialised yet 
         init_if_needed,
         // make space of 32 bytes which should be enough for GuessingAccount 
