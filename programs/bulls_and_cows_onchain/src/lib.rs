@@ -8,13 +8,12 @@ declare_id!("28rwUTUkRqC9ZgqXMdR9GxWFuUo9PPyqhHwMALZLBbLU");
 #[program]
 // we use pub so the functions and modules inside anchor bac can be used externally
 pub mod anchor_bac {
-    use std::cmp::Ordering;
-
     // to allow the use of all the components from the parent module without redeclaring them
     use super::*;
+    use std::cmp::Ordering;
     // now the program initialisation is done ✅
 
-    // making a function that initialize random numbers and records them 
+    // making a function that initialize random numbers and records them to the context 
     //<()> this means that nothing is returned on success and Err is returned on the fail 
     pub fn initialize(ctx: Context<AccountContext>) -> Result<()> {
         // i need to import the guessing account from the context part 
@@ -23,7 +22,7 @@ pub mod anchor_bac {
         Ok(())
     }
     // making a function that compares the entered guess by the user to the number field stored in
-    // the data account and returning 
+    // the data account and returning error messages from MyError  
     pub fn guess(ctx: Context<AccountContext>, number: u32) -> Result<()> {
 
         let guessing_account = &mut ctx.accounts.guessing_account;
